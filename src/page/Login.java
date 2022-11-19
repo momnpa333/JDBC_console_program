@@ -14,8 +14,14 @@ public class Login extends Page {
 		
 		addMenu(new Menu("캐릭터 선택하기") {
 			public void execute() {
-				
+				List<CharacterDTO> CharacterList = userDAO.getCharacterList(user.getUserID());
+				int num=1;
+				for (CharacterDTO character : CharacterList) {
+					System.out.printf("%d",num++);
+					System.out.println(character);
+				}
 			};
+			
 		});
 		addMenu(new Menu("보유 아이템 조회") {
 			public void execute() {
@@ -25,9 +31,12 @@ public class Login extends Page {
 				}
 			};
 		});
-		addMenu(new Menu("랭킹 보기") {
+		addMenu(new Menu("기록 보기") {
 			public void execute() {
-				
+				List<ItemDTO> itemList = userDAO.getItemList(user.getUserID());
+				for (ItemDTO item : itemList) {
+					System.out.println(item);
+				}	
 			};
 		});
 		addMenu(new Menu("비밀번호 변경") {
