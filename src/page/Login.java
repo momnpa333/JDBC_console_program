@@ -8,6 +8,8 @@ import java.util.List;
 public class Login extends Page {
 	UserDTO user;
 	UserDAO userDAO = UserDAO.getInstance();
+	RecordDTO record;
+	RecordDAO recordDAO=RecordDAO.getInstance();
 	public Login(UserDTO user) {
 		this.user = user;
 		System.out.println(user.getUserID() + "님 환영합니다.");
@@ -33,9 +35,10 @@ public class Login extends Page {
 		});
 		addMenu(new Menu("기록 보기") {
 			public void execute() {
-				List<ItemDTO> itemList = userDAO.getItemList(user.getUserID());
-				for (ItemDTO item : itemList) {
-					System.out.println(item);
+				System.out.printf("  닉네임:      mapNo:     기록(ms)\n");
+				List<RecordDTO> RecordList = recordDAO.getRecordList(user.getUserID());
+				for (RecordDTO record : RecordList) {
+					record.printrecord();
 				}	
 			};
 		});
